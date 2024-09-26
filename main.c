@@ -1,12 +1,21 @@
 // Лабораторная работа номер 1 Нарюков Дмитрий 3824Б1ПР3
+
+// Подключение библиотек
 #include <stdio.h>
 #include <windows.h>
-
 
 int zadanie1() {
     int h, w, d;
 
-    scanf("%d %d %d", &h, &w, &d);
+    // Вводим размеры шкафа
+    printf("\nВведите высоту шкафа (180-220 см):");
+    scanf("%d", &h);
+    printf("Введите ширину шкафа (80-120 см):");
+    scanf("%d", &w);
+    printf("Введите глубину шкафа (50-90 см):");
+    scanf("%d", &d);
+
+    // Переводим в метры
     double height_m = h / 100.0;
     double width_m = w / 100.0;
     double depth_m = d / 100.0;
@@ -19,7 +28,7 @@ int zadanie1() {
     // Верхняя и нижняя крышки
     double volume_dsp_top_bottom = 2 * (width_m * depth_m * 0.015); // толщина 15 мм
     // Две двери
-    double volume_wood_doors = 2 * (height_m * width_m * 0.01); // толщина 1 см
+    double volume_wood_doors = height_m * width_m * 0.01; // толщина 1 см
     // Полки
     int shelves_count = h / 40 - 1; // Количество полок (первую не считаем)
     double volume_dsp_shelves = shelves_count * (width_m * depth_m * 0.015); // толщина 15 мм
@@ -32,18 +41,22 @@ int zadanie1() {
     double mass_dsp_shelves = volume_dsp_shelves * 800; // масса полок
 
     // Общая масса
-    double total_mass = mass_dvp + mass_dsp_sides + mass_dsp_top_bottom + mass_wood_doors + mass_dsp_shelves;
+    double result_mass = mass_dvp + mass_dsp_sides + mass_dsp_top_bottom + mass_wood_doors + mass_dsp_shelves;
 
-    printf("%.2lf", total_mass);
+    // Выыод
+    printf("\nМасса шкафа: %2.3lf кг", result_mass);
 }
 
+int zadanie2() {
+    char x, y;
 
+    printf("Введите первую координату:");
+    scanf("%c", &x);
+    printf("Введите вторую координату:");
+    scanf("%c", &y);
 
-
-
-
-
-
+    printf("%c %c", x, y);
+}
 
 int main() {
     SetConsoleOutputCP(CP_UTF8); // Подключение Русского для Clion
@@ -53,7 +66,7 @@ int main() {
 
     switch (number) {
         case 1: zadanie1(); break;
+        case 2: zadanie2(); break;
     }
 
 }
-

@@ -1,9 +1,6 @@
-// Лабораторная работа номер 1 Нарюков Дмитрий 3824Б1ПР3
-
 // Подключение библиотек
 #include <stdio.h>
 #include <windows.h>
-#include <string.h>
 
 int zadanie1() {
     int h, w, d;

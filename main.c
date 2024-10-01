@@ -3,6 +3,7 @@
 // Подключение библиотек
 #include <stdio.h>
 #include <windows.h>
+#include <string.h>
 
 int zadanie1() {
     int h, w, d;
@@ -47,15 +48,47 @@ int zadanie1() {
     printf("\nМасса шкафа: %2.3lf кг", result_mass);
 }
 
+
+
+
 int zadanie2() {
-    char x, y;
+    char startCell[10], endCell[10], figure[20];
 
-    printf("Введите первую координату:");
-    scanf("%c", &x);
-    printf("Введите вторую координату:");
-    scanf("%c", &y);
+    int startX, startY, endX, endY;
 
-    printf("%c %c", x, y);
+    // Ввод данных
+    printf("\nВведите начальную клетку (например e2):");
+    scanf("%s", startCell);
+    printf("Введите конечную клетку (например g5):");
+    scanf("%s", endCell);
+    printf("Введите фигуру (король(kor), ферзь(ferz), ладья(lad), слон(slon), конь(kon)):");
+    scanf("%s", figure);
+
+    startY = (int)(startCell[1] - '0');
+    endY = (int)(endCell[1] - '0');
+    switch (startCell[0]) {
+        case 'a' : startX = 1; break;
+        case 'b' : startX = 2; break;
+        case 'c' : startX = 3; break;
+        case 'd' : startX = 4; break;
+        case 'e' : startX = 5; break;
+        case 'f' : startX = 6; break;
+        case 'g' : startX = 7; break;
+        case 'h' : startX = 8; break;
+    }
+    switch (endCell[0]) {
+        case 'a' : endX = 1; break;
+        case 'b' : endX = 2; break;
+        case 'c' : endX = 3; break;
+        case 'd' : endX = 4; break;
+        case 'e' : endX = 5; break;
+        case 'f' : endX = 6; break;
+        case 'g' : endX = 7; break;
+        case 'h' : endX = 8; break;
+    }
+
+        // printf("%d %d %d %d", startX, endX, startY, endY);
+
 }
 
 int main() {

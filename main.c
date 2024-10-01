@@ -1,6 +1,9 @@
+// Лабораторная работа номер 1 Нарюков Дмитрий 3824Б1ПР3
+
 // Подключение библиотек
 #include <stdio.h>
 #include <windows.h>
+#include <string.h>
 
 int zadanie1() {
     int h, w, d;
@@ -45,7 +48,92 @@ int zadanie1() {
     printf("\nМасса шкафа: %2.3lf кг", result_mass);
 }
 
+// Вспомогательная функция для функции yesHod
+int vspom(int x1, int y1, int x2, int y2) {
+    int res;
+    // Проверка хода ладьи
+    if (x1 == x2 || y1 == y2) {
+        printf("Ладья может совершить ход\n");
+        res++;
+    }
+    // Проверка хода короля
+    if ((x1 - x2 == 1 || x1 - x2 == -1 || x1 - x2 == 0) && (y1 - y2 == 1 || y1 - y2 == -1 || y1 - y2 == 0)) {
+        printf("Король может совершить ход\n");
+        res++;
+    }
+    // Проверка хода слона
+    if (abs(x1 - x2) == abs(y1 - y2)) {
+        printf("Слон может совершить ход\n");
+        res++;
+    }
+    // Проверка хода ферзя
+    if ((abs(x1 - x2) == abs(y1 - y2)) || x1 == x2 || y1 == y2) {
+        printf("Ферзь может совершить ход\n");
+        res++;
+    }
+    // Проверка хода коня
+    if ((x1 - 1 == x2 || x1 + 1 == x2) && (y1 - 2 == y2 || y1 + 2 == y2)) {
+        printf("Конь может совершить ход\n");
+        res++;
+    } else if ((x1 - 2 == x2 || x1 + 2 == x2) && (y1 - 1 == y2 || y1 + 1 == y2)) {
+        printf("Конь может совершить ход\n");
+        res++;
+    }
+    if (res == 0) {
+        printf("Все фигуры не могут совершить данный ход");
+    }
+}
 
+// Функция для 2 задания на проверку возможности хода
+int yesHod(int x1, int y1, int x2, int y2, char *name) {
+    // Проверка хода ладьи
+    if (strcmp(name, "lad") == 0) {
+        if (x1 == x2 || y1 == y2) {
+            printf("Ладья может совершить ход");
+        } else {
+            printf("Ладья не может совершить ход\n\n");
+            vspom(x1, y1, x2, y2);
+        }
+    }
+    // Проверка хода короля
+    if (strcmp(name, "kor") == 0) {
+        if ((x1 - x2 == 1 || x1 - x2 == -1 || x1 - x2 == 0) && (y1 - y2 == 1 || y1 - y2 == -1 || y1 - y2 == 0)) {
+            printf("Король может совершить ход");
+        } else {
+            printf("Король не может совершить ход\n\n");
+            vspom(x1, y1, x2, y2);
+        }
+    }
+    // Проверка хода слона
+    if (strcmp(name, "slon") == 0) {
+        if (abs(x1 - x2) == abs(y1 - y2)) {
+            printf("Слон может совершить ход");
+        } else {
+            printf("Слон не может совершить ход\n\n");
+            vspom(x1, y1, x2, y2);
+        }
+    }
+    // Проверка хода ферзя
+    if (strcmp(name, "ferz") == 0) {
+        if ((abs(x1 - x2) == abs(y1 - y2)) || x1 == x2 || y1 == y2) {
+            printf("Ферзь может совершить ход");
+        } else {
+            printf("Ферзь не может совершить ход\n\n");
+            vspom(x1, y1, x2, y2);
+        }
+    }
+    // Проверка хода коня
+    if (strcmp(name, "kon") == 0) {
+        if ((x1 - 1 == x2 || x1 + 1 == x2) && (y1 - 2 == y2 || y1 + 2 == y2)) {
+            printf("Конь может совершить ход");
+        } else if ((x1 - 2 == x2 || x1 + 2 == x2) && (y1 - 1 == y2 || y1 + 1 == y2)) {
+            printf("Конь может совершить ход");
+        } else {
+            printf("Конь не может совершить ход\n\n");
+            vspom(x1, y1, x2, y2);
+        }
+    }
+}
 
 
 int zadanie2() {
@@ -61,8 +149,8 @@ int zadanie2() {
     printf("Введите фигуру (король(kor), ферзь(ferz), ладья(lad), слон(slon), конь(kon)):");
     scanf("%s", figure);
 
-    startY = (int)(startCell[1] - '0');
-    endY = (int)(endCell[1] - '0');
+    startY = startCell[1] - '0'; // Перевод из char в int
+    endY = endCell[1] - '0'; // Перевод из char в int
     switch (startCell[0]) {
         case 'a' : startX = 1; break;
         case 'b' : startX = 2; break;
@@ -84,7 +172,8 @@ int zadanie2() {
         case 'h' : endX = 8; break;
     }
 
-        // printf("%d %d %d %d", startX, endX, startY, endY);
+    // Вызов функции проверки хода
+    yesHod(startX, startY, endX, endY, figure);
 
 }
 
